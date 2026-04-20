@@ -1,0 +1,47 @@
+Sources:
+
+Dataset Source: https://www.kaggle.com/datasets/csmalarkodi/isot-fake-news-dataset
+
+NOTES for the dataset:
+
+I am using the ISOT dataset, since this can be easily imported and labeled using Pandas Dataframes.
+
+The dataset is exported as 2 csv files: True.csv and Fake.csv.
+
+Using pandas, I was able to easily add a label field, indicating whether an entry is true or fake news, shuffle the dataset, then convert to a hugging face Dataset.
+
+Furthermore, I can use Pandas to remove the subject and date columns. Since the subject column might be a giveaway as to well a news piece is sensationalist or not and the date is irrelevant information for the model.
+
+This way, we are only including the relevant data, that being the title and text columns of the ISOT dataset. We can then tokenize the dataset to create a separator between the title and text in a BERT native way.
+
+Hugging face provides the Dataset interface, which is optimized for speed and memory.
+
+Using the train_test_split, I am able to create the training, test, and validation set. Furthermore, by strifying by the label column, I am able to ensure that each set does not have an inbalanced number of true or FAKE news articles. This way, the BERT model has a good spread across the latent space when training.
+
+
+Tokenization Sample: working correctly
+
+There are three arrays every BERT model needs, this being the input_ids, token_type_ids, and attention_mask.
+
+The input_ids is the set of integer IDs for each token in BERT's 30,522-word vocab. 101 = [CLS], 102 = [SEP], 0 = padding
+
+The token_type_ids shows whether a token belongs to the title (segment A), belongs to the text (segment B). Which is how BERT natively handles two-sentence inputs.
+
+Attention_mask is either 1 = real token, 0 = padding.
+
+The BERT Load report: the unexpected keys are weights from the original pre-training tasks that bert-base-uncased was trained on.
+
+Some notes in the current pipeline that I would need to adjust in order to finetune just the base BERT model to fi tand ensure that the metrics are matching the actual results that are desired for the final project.
+
+1. I need to change the f1 metrics to compute F1 for both classes, instead of only for True news. I will also need to change the greater_is_better from False to True
+
+Sources cited in the report: 
+BERT paper: https://arxiv.org/abs/1810.04805
+
+Data import: https://www.kaggle.com/code/aryand03/nlp-assignment/notebook
+
+Fine Tuning Strategy:
+https://medium.com/@heyamit10/fine-tuning-bert-for-classification-a-practical-guide-b8c1c56f252c
+https://huggingface.co/docs/transformers/en/tasks/sequence_classification
+
+Evaluation Requirements: 
