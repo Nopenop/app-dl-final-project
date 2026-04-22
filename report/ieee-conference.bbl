@@ -1,0 +1,14 @@
+\begin{thebibliography}{1}
+
+\bibitem{bert_paper}
+J.~Devlin, M.-W. Chang, K.~Lee, and K.~Toutanova, {\em BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding}, 2018.
+
+\bibitem{isot_dataset}
+C.~S. Malarkodi, {\em ISOT Fake News Dataset}, 2021.
+\newblock Accessed: 2024-05-22.
+
+\bibitem{medium_bert_guide}
+H.~Amit, {\em Fine-Tuning BERT for Classification: A Practical Guide}, 2023.
+\newblock Accessed: 2024-05-22.
+
+\end{thebibliography}
